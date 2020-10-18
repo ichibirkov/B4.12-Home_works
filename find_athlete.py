@@ -123,7 +123,7 @@ def search_by_height(user, session):
     """
     Ищет ближайшего по росту атлета к пользователю user
     """
-    athletes_list = session.query(Athelete).all()
+    athletes_list = session.query(Athelete).filter(Athelete.height != None).all()
     atlhete_id_height = {athlete.id: athlete.height for athlete in athletes_list}
 
     user_height = user.height
