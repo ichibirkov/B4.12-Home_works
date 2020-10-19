@@ -13,31 +13,31 @@ class Athelete(Base):
     """
     __tablename__ = 'athelete'
 
-    id = sa.Column(sa.INTEGER, primary_key=True)
+    id = sa.Column(sa.Integer, primary_key=True)
     # возраст атлета
-    age = sa.Column(sa.INTEGER)
+    age = sa.Column(sa.Integer)
     # день рождения атлета
-    birthdate = sa.Column(sa.TEXT)
+    birthdate = sa.Column(sa.Text)
     # пол атлета
-    gender = sa.Column(sa.TEXT)
+    gender = sa.Column(sa.Text)
     # рост атлета
-    height = sa.Column(sa.FLOAT)
+    height = sa.Column(sa.Float)
     # имя и фамилия атлета
-    name = sa.Column(sa.TEXT)
+    weight = sa.Column(sa.Integer)
     # вес атлета
-    weight = sa.Column(sa.INTEGER)
+    name = sa.Column(sa.Text)
     # количество выигранных золотых медалей у атлета
-    gold_medals = sa.Column(sa.INTEGER)
+    gold_medals = sa.Column(sa.Integer)
     # количество выигранных серебрянных медалей у атлета
-    silver_medals = sa.Column(sa.INTEGER)
+    silver_medals = sa.Column(sa.Integer)
     # количество выигранных бронзовых медалей у атлета
-    bronze_medals = sa.Column(sa.INTEGER)
+    bronze_medals = sa.Column(sa.Integer)
     # общее количество медалей у атлета
-    total_medals = sa.Column(sa.INTEGER)
+    total_medals = sa.Column(sa.Integer)
     # вид спорта, в котором выступает атлет
-    sport = sa.Column(sa.TEXT)
+    sport = sa.Column(sa.Text)
     # страна которую представляем атлет
-    country = sa.Column(sa.TEXT)
+    country = sa.Column(sa.Text)
 
 
 class User(Base):
@@ -48,7 +48,7 @@ class User(Base):
     __tablename__ = 'user'
 
     # идентификатор пользователя, первичный ключ
-    id = sa.Column(sa.INTEGER, primary_key=True)
+    id = sa.Column(sa.String(36), primary_key=True)
     # имя пользователя
     first_name = sa.Column(sa.Text)
     # фамилия пользователя
@@ -81,7 +81,7 @@ def request_data():
     # приветствие
     print("Добрый день! Начинаем поиск атлетов похожих на пользователя.  ")
     user_id = input("Пожалуйста, введите id пользователя: ")
-    return user
+    return int(user_id)
 
 
 def convert_date(date_str):
@@ -123,7 +123,7 @@ def search_by_height(user, session):
     """
     Ищет ближайшего по росту атлета к пользователю user
     """
-    athletes_list = session.query(Athelete).filter(Athelete.height != None).all()
+    athletes_list = session.query(Athelete).all()
     atlhete_id_height = {athlete.id: athlete.height for athlete in athletes_list}
 
     user_height = user.height
